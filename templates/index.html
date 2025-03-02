@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Multilingual Muse</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to The Multilingual Muse</h1>
+        <form method="post">
+            <textarea name="text" placeholder="Enter text to translate" required></textarea><br>
+            <select name="language" required>
+                {% for code, name in languages.items() %}
+                    <option value="{{ code }}">{{ name }}</option>
+                {% endfor %}
+            </select><br>
+            <button type="submit">Translate</button>
+        </form>
+
+        {% if translated_text %}
+            <h2>Translated Text:</h2>
+            <p>{{ translated_text }}</p>
+        {% endif %}
+
+        {% if error_msg %}
+            <h2>Error:</h2>
+            <p style="color: red;">{{ error_msg }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>
